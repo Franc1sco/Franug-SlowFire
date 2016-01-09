@@ -20,6 +20,12 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	CreateConVar("sm_SlowFire", "2.0", "Version", FCVAR_NOTIFY | FCVAR_DONTRECORD | FCVAR_CHEAT);
+	
+	for(int i = 1; i <= MaxClients; i++)
+		if(IsClientInGame(i))
+		{
+			OnClientPutInServer(i);
+		}
 }
 
 public OnClientPutInServer(client)
@@ -52,8 +58,8 @@ public Action:Stop(Handle:timer, any:client)
 	Timers[client] = INVALID_HANDLE;
 	if(IsClientInGame(client) && IsPlayerAlive(client))
 	{
-		new velocidad = ZRT_GetClientAttributeValue(client, "speed", 300);
-		SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", velocidad*1.0);
+		float velocidad = ZRT_GetClientAttributeValueFloat(client, "speed", 300.0);
+		SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", velocidad/300.0);
 	}
 }
 
