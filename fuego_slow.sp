@@ -53,7 +53,7 @@ public Action:Stop(Handle:timer, any:client)
 	if(IsClientInGame(client) && IsPlayerAlive(client))
 	{
 		new velocidad = ZRT_GetClientAttributeValue(client, "speed", 300);
-		SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", Float:velocidad);
+		SetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue", velocidad*1.0);
 	}
 }
 
